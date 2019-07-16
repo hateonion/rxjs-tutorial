@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 const observable = Observable.create(observer => {
   observer.next('foo');
   observer.next('bar');
+  observer.complete();
+  observer.next('foobar');
 })
 
 
