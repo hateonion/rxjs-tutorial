@@ -1,10 +1,9 @@
 import { Observable } from 'rxjs'; 
 
 const observable = Observable.create(observer => {
-  observer.next('foo');
-  observer.next('bar');
-  observer.complete();
-  observer.next('foobar');
+  setInterval(()=> {
+    observer.next('I am alive')
+  }, 1000)
 })
 
 
@@ -15,6 +14,8 @@ const addItem = (value: string) => {
   parent.appendChild(ele);
 }
 
-observable.subscribe(addItem, f=>f, ()=> addItem('complete'));
+const subscription = observable.subscribe(addItem, f=>f, ()=> addItem('complete'));
+
+setTimeout(() => subscription.unsubscribe(), 5001)
 
 
