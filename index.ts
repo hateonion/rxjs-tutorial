@@ -15,6 +15,6 @@ const addItem = (value: string) => {
   parent.appendChild(ele);
 }
 
-observable.subscribe(addItem)
+observable.subscribe(addItem, f=>f, ()=> addItem('complete'));
 
 
