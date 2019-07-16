@@ -1,10 +1,10 @@
 import { Observable } from 'rxjs'; 
 
-const observable = Observable.create(observer => {
-  observer.next('foo');
-  observer.next('bar');
-  observer.complete();
-  observer.next('foobar');
+const observable = Observable.create(stream => {
+  stream.next('foo');
+  stream.next('bar');
+  stream.complete();
+  stream.next('foobar');
 })
 
 
