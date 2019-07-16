@@ -1,5 +1,9 @@
 import { Observable } from 'rxjs'; 
-import { map } from 'rxjs/operators';
+
+const observable = Observable.create(observer => {
+  observer.next('foo');
+  observer.next('bar');
+})
 
 
 const addItem = (value: string) => {
@@ -8,4 +12,7 @@ const addItem = (value: string) => {
   ele.textContent = value;
   parent.appendChild(ele);
 }
+
+observable.subscribe(addItem)
+
 
