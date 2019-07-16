@@ -14,7 +14,7 @@ const addItem = (value: string) => {
   parent.appendChild(ele);
 }
 
-const subscription = observable.subscribe(addItem, f=>f, ()=> addItem('complete'));
+const subscription = observable.subscribe(addItem);
 
 setTimeout(() => subscription.unsubscribe(), 5001)
 
