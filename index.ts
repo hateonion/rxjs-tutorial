@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs'; 
+import { share } from 'rxjs/operators';
 
 const observable = Observable.create(observer => {
   observer.next('Start');
@@ -6,7 +7,7 @@ const observable = Observable.create(observer => {
   setInterval(()=> {
     observer.next('I am alive')
   }, 1000)
-})
+}).pipe(share());
 
 const addItem = (value: string) => {
   const parent = document.querySelector('ul');
