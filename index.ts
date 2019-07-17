@@ -15,9 +15,11 @@ const addItem = (value: string) => {
 }
 
 const subscription = observable.subscribe(addItem);
-setTimeout(()=> observable.subscribe((value) => addItem(`Subscriber2 ${value}`)), 2000);
+const subscription2 =  observable.subscribe((value) => addItem(`Subscriber2 ${value}`));
 
-subscription.add();
+subscription.add(subscription2);
+
+setTimeout(() => subscription.unsubscribe(), 3000)
 
 
 
