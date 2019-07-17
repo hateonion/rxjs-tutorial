@@ -1,7 +1,7 @@
-import { BehaviorSubject } from 'rxjs'; 
+import { ReplaySubject } from 'rxjs'; 
 import { share } from 'rxjs/operators';
 
-const subject = new BehaviorSubject('foo');
+const subject = new ReplaySubject(2);
 
 const addItem = (value: string) => {
   const parent = document.querySelector('ul');
@@ -14,6 +14,7 @@ const subscription = subject.subscribe(addItem);
 
 subject.next('I am a Subject');
 subject.next('I am also a Observable');
+subject.next('And I am hot');
 
 const subscription2 = subject.subscribe(value => addItem(`Subscriber2: ${value}`));
 
