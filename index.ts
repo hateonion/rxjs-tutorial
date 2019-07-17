@@ -1,13 +1,7 @@
-import { Observable } from 'rxjs'; 
+import { Subject } from 'rxjs'; 
 import { share } from 'rxjs/operators';
 
-const observable = Observable.create(observer => {
-  observer.next('Start');
-  observer.next('Yeah');
-  setInterval(()=> {
-    observer.next('I am alive')
-  }, 1000)
-}).pipe(share());
+const subject = new Subject();
 
 const addItem = (value: string) => {
   const parent = document.querySelector('ul');
@@ -16,5 +10,10 @@ const addItem = (value: string) => {
   parent.appendChild(ele);
 }
 
-const subscription = observable.subscribe(addItem);
-setTimeout(()=> observable.subscribe((value) => addItem(`Subscriber2 ${value}`)), 2000);
+const subscription = subject.subscribe(addItem);
+
+subject.next('I am a Subject');
+
+const subscription2 = subject.subscribe(value => addItem(`Subscriber2: ${value}`));
+
+subject.next('Heelo');
