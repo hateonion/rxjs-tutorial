@@ -1,7 +1,7 @@
-import { ReplaySubject } from 'rxjs'; 
+import { AsyncSubject } from 'rxjs'; 
 import { share } from 'rxjs/operators';
 
-const subject = new ReplaySubject(2);
+const subject = new AsyncSubject();
 
 const addItem = (value: string) => {
   const parent = document.querySelector('ul');
@@ -18,4 +18,5 @@ subject.next('And I am hot');
 
 const subscription2 = subject.subscribe(value => addItem(`Subscriber2: ${value}`));
 
+subject.complete();
 subject.next('Heelo');
