@@ -1,11 +1,11 @@
 import { Observable } from 'rxjs'; 
 import { share } from 'rxjs/operators';
 
-const observable = Observable.create(observer => {
-  observer.next('Start');
-  observer.next('Yeah');
+const observable = Observable.create(hot => {
+  hot.next('Start');
+  hot.next('Yeah');
   setInterval(()=> {
-    observer.next('I am alive')
+    hot.next('I am alive')
   }, 1000)
 }).pipe(share());
 
