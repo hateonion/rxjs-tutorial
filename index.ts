@@ -1,20 +1,8 @@
-import { Observable } from 'rxjs'; 
-import { share } from 'rxjs/operators';
+import { Observable, of } from 'rxjs'; 
+import { share, switchMap, } from 'rxjs/operators';
+import {fromFetch} from 'rxjs/fetch';
 
-const observable = Observable.create(hot => {
-  hot.next('Start');
-  hot.next('Yeah');
-  setInterval(()=> {
-    hot.next('I am alive')
-  }, 1000)
-}).pipe(share());
+const coldObservable = of('https://hacker-news.firebaseio.com/v0/item/8863.json?print=pretty').pipe(switchMap(url => fromFetch(url)), share());
 
-const addItem = (value: string) => {
-  const parent = document.querySelector('ul');
-  const ele = document.createElement('li');
-  ele.textContent = value;
-  parent.appendChild(ele);
-}
-
-const subscription = observable.subscribe(addItem);
-setTimeout(()=> observable.subscribe((value) => addItem(`Subscriber2 ${value}`)), 2000);
+const sub1 = coldObservable.subscribe(console.log);
+const sub2 = coldObservable.subscribe(console.log);
