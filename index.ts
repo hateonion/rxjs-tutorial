@@ -1,10 +1,9 @@
-import { Observable } from 'rxjs'; 
+import { Observable, Observer } from "rxjs";
 
-const observable = Observable.create(observer => {
-  observer.next('foo');
-  observer.next('bar');
-})
-
+const observable: Observable<string> = Observable.create(it => {
+  it.next("foo");
+  it.next("bar");
+});
 
 const addItem = (value: string) => {
   const parent = document.querySelector('ul');
@@ -13,6 +12,13 @@ const addItem = (value: string) => {
   parent.appendChild(ele);
 }
 
-observable.subscribe(addItem)
+const observer: Observer<string> = {
+  next: addItem,
+  error: f => f,
+  complete: console.log
+};
+
+
+observable.subscribe(observer)
 
 
