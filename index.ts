@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs'; 
 
-const observable = Observable.create(observer => {
+const observable = Observable.create(it => {
   setInterval(()=> {
-    observer.next('I am alive')
+    it.next('I am alive')
   }, 1000)
 })
 
